@@ -7,7 +7,6 @@ begin
 end
 
 PORT_MAPPINGS='-p 8083:8083 -p 8086:8086 -p 80:80 -p 8084:8084 -p 8090:8090 -p 8099:8099'
-
 IMAGE_NAME=File.basename(Dir.getwd)
 
 task :build do
@@ -27,7 +26,7 @@ end
 
 task :shell do
   puts "Going interactive with #{IMAGE_NAME} image..."
-  system "docker run --rm #{PORT_MAPPINGS} -t -i #{IMAGE_NAME} /bin/bash > pid"
+  exec "docker run --rm #{PORT_MAPPINGS} -t -i #{IMAGE_NAME} /bin/bash"
 end
 
 task default: [:spec]

@@ -4,6 +4,7 @@ import (
 	"testing"
 	"net/http"
 	"io/ioutil"
+	"github.com/bradfitz/iter"
 	. "gopkg.in/check.v1"
 )
 func Test(t *testing.T) { TestingT(t) }
@@ -39,10 +40,13 @@ func loadInstanceMetricTemplate(c *C) string{
 
 func (self *DataTestSuite) TestWriteOneItem(c *C) {
 	data := loadInstanceMetricTemplate(c)
-	self.client.WriteJsonData(data, c)
+	entries := 70000
+	for _ = range iter.N(entries){
+		self.client.WriteJsonData(data, c)
+	}
 	result := self.client.RunQuery("select count(trackingObjectId) from instance_metrics", c)
-	c.Assert(result, HasLen, 1)
+//	c.Assert(result, HasLen, 1)
 	maps := ToMap(result[0])
-	c.Assert(maps, HasLen, 1)
-	c.Assert(maps[0]["count"], Equals, 1.0)
+//	c.Assert(maps, HasLen, 1)
+	c.Assert(maps[0]["count"], Equals, float64(entries))
 }

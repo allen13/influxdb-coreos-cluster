@@ -16,7 +16,7 @@ end
 
 task :deploy do
   puts "Deploying #{IMAGE_NAME} image..."
-  system "docker run -d #{PORT_MAPPINGS} #{IMAGE_NAME} > pid"
+  system "docker run -d #{PORT_MAPPINGS} #{IMAGE_NAME} /sbin/my_init --enable-insecure-key > pid"
 end
 
 task :destroy do

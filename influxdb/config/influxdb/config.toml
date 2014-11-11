@@ -18,7 +18,7 @@ reporting-disabled = false
 [logging]
 # logging level can be one of "fine", "debug", "info", "warn" or "error"
 level  = "info"
-file   = "influxdb.log"         # stdout to log to standard out, or syslog facility
+file   = "/var/log/influxdb/influxdb.log"         # stdout to log to standard out, or syslog facility
 
 # Configure the admin server
 [admin]
@@ -77,7 +77,7 @@ read-timeout = "10m"
 port = 8090
 
 # Where the raft logs are stored. The user running InfluxDB will need read/write access.
-dir  = "/tmp/influxdb/development/raft"
+dir  = "/data/influxdb/development/raft"
 
 debug = false
 
@@ -85,7 +85,7 @@ debug = false
 
 [storage]
 
-dir = "/tmp/influxdb/development/db"
+dir = "/data/influxdb/development/db"
 # How many requests to potentially buffer in memory. If the buffer gets filled then writes
 # will still be logged and once the local storage has caught up (or compacted) the writes
 # will be replayed from the WAL
@@ -186,7 +186,7 @@ concurrent-shard-query-limit = 10
 
 [wal]
 
-dir   = "/tmp/influxdb/development/wal"
+dir   = "/data/influxdb/development/wal"
 flush-after = 1000 # the number of writes after which wal will be flushed, 0 for flushing on every write
 bookmark-after = 1000 # the number of writes after which a bookmark will be created
 

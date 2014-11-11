@@ -11,4 +11,6 @@ ADD service/. /etc/service/
 
 EXPOSE 8083 8086 8084
 
+VOLUME ["/data"]
+
 CMD ["/sbin/my_init"]

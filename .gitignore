@@ -1,2 +1,4 @@
 pid
 .idea/
+.vagrant
+discovery_token

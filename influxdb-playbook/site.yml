@@ -1,8 +1,6 @@
 ---
 - hosts: all
   gather_facts: False
-  vars:
-  - discovery_token: https://discovery.etcd.io/c4886bc229a1bf23c3e7f5284ecd2dc7
   roles:
     - defunctzombie.coreos-bootstrap
     - influxdb

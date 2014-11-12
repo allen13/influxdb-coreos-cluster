@@ -1,0 +1,5 @@
+---
+#configure coreos instances
+- name: Distribute coreos cloud config
+  template: src="cloud-config.yml.j2" dest="/var/lib/coreos-vagrant/vagrantfile-user-data"
+  sudo: true

@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-for i in `seq 70000`; do \
- curl -X POST "http://localhost:8086/db/instance_metrics/series?u=root&p=root" --data @instance_metric_schema.json
-done

@@ -1,6 +1,7 @@
 #cloud-config
 
 ---
+manage_etc_hosts: localhost
 coreos:
   etcd:
     discovery: {{discovery_token}}

@@ -1,0 +1,2 @@
+#!/bin/bash
+vagrant ssh-config | sed -n "s/IdentityFile//gp" | xargs ssh-add

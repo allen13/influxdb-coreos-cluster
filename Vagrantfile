@@ -22,7 +22,7 @@ def provision_coreos_influxdb_vm(vm_number, config)
     config.vm.network :private_network, ip: "172.17.8.#{vm_number+100}"
 
     config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "influxdb-playbook/site.yml"
+      ansible.playbook = "coreos-playbook/bootstrap-coreos.yml"
       ansible.extra_vars = {
         discovery_token: discovery_token,
         ansible_ssh_user: 'core',

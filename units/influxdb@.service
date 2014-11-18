@@ -4,11 +4,14 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+EnvironmentFile=/etc/environment
 TimeoutStartSec=0
-ExecStartPre=-/usr/bin/docker kill influxdb
-ExecStartPre=-/usr/bin/docker rm influxdb
-ExecStartPre=/usr/bin/docker pull allen13/influxdb
-ExecStart=/usr/bin/docker run -rm --name influxdb -p 8083:8083 -p 8086:8086 -p 8090 -p 8099 allen13/influxdb
-ExecStop=/usr/bin/docker stop influxdb
+ExecStartPre=-/usr/bin/docker kill influxdb-%i
+ExecStartPre=-/usr/bin/docker rm influxdb-%i
+ExecStartPre=/usr/bin/docker pull allen13/influxdb-min
+
+ExecStart=/bin/sh -c '/usr/bin/docker run --rm --name influxdb-%i -v /data/influxdb/:/data/influxdb/ -p 8083:8083 -p 8086:8086 -p 8090:8090 -p 8099:8099 -e SEED="$(/usr/bin/etcdctl get /services/influxdb/master)" -e HOSTNAME="${COREOS_PUBLIC_IPV4}" allen13/influxdb-min'
+ExecStop=/usr/bin/docker stop influxdb-%i
 
 [X-Fleet]
+Conflicts=influxdb*

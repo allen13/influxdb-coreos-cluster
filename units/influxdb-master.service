@@ -1,0 +1,25 @@
+[Unit]
+Description=InfluxDB Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill influxdb-master
+ExecStartPre=-/usr/bin/docker rm influxdb-master
+ExecStartPre=/usr/bin/docker pull allen13/influxdb-min
+
+ExecStart=/usr/bin/docker run --rm \
+  --name influxdb-master \
+  -v /data/influxdb/:/data/influxdb/ \
+  -p 8083:8083 -p 8086:8086 -p 8090:8090 -p 8099:8099 \
+  -e HOSTNAME=${COREOS_PUBLIC_IPV4} \
+  allen13/influxdb-min
+
+ExecStartPost=/usr/bin/etcdctl set /services/influxdb/master "${COREOS_PUBLIC_IPV4}:8090"
+ExecStop=/usr/bin/docker stop influxdb-master
+ExecStopPost=/usr/bin/etcdctl rm /services/influxdb/master
+
+[X-Fleet]
+Conflicts=influxdb*

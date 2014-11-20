@@ -12,6 +12,7 @@ ExecStartPre=/usr/bin/docker pull allen13/influxdb-min
 
 ExecStart=/usr/bin/docker run --rm \
   --name influxdb-master \
+  -e SERVICE_ID=influxdb-master \
   -v /data/influxdb/:/data/influxdb/ \
   -p 8083:8083 -p 8086:8086 -p 8090:8090 -p 8099:8099 \
   -e HOSTNAME=${COREOS_PUBLIC_IPV4} \

@@ -1,0 +1,2 @@
+vagrant destroy --force
+rm discovery_token

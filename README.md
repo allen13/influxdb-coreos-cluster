@@ -5,7 +5,7 @@ An influxdb cluster managed by coreos
 
 ####Setup
 
-Requires [Vagrant](https://docs.vagrantup.com/v2/installation/), [Ansible](http://docs.ansible.com/intro_installation.html), and the [fleet binary](https://github.com/coreos/fleet/releases)
+Requires [Vagrant](https://docs.vagrantup.com/v2/installation/), [Ansible](http://docs.ansible.com/intro_installation.html), and [fleetctl](https://github.com/coreos/fleet/)
     
 Install ansible on Ubuntu
 
@@ -13,6 +13,11 @@ Install ansible on Ubuntu
     $ sudo apt-add-repository ppa:ansible/ansible
     $ sudo apt-get update
     $ sudo apt-get install ansible
+    
+Install fleetctl
+
+    wget https://github.com/coreos/fleet/releases/download/v0.8.3/fleet-v0.8.3-linux-amd64.tar.gz -O - | sudo tar -xz -C /opt/
+    sudo ln -s /opt/fleet-v0.8.3-linux-amd64/fleetctl /usr/local/bin/fleetctl
     
 ####Running
 

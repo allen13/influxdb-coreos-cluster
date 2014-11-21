@@ -1,0 +1,2 @@
+#!/bin/bash
+export FLEETCTL_TUNNEL=127.0.0.1:2222

@@ -12,16 +12,12 @@ coreos:
   units:
   - name: etcd.service
     command: start
-
   - name: fleet.service
     command: start
-
   - name: consul.service
     command: start
-
   - name: registrator.service
     command: start
-
   - name: docker-tcp.socket
     command: start
     enable: true

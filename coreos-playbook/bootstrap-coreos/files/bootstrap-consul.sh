@@ -5,7 +5,7 @@ machines=$(/usr/bin/etcdctl ls /consul.io/bootstrap/machines)
 
 if [ -z "$machines" ]
 then
-flags="${flags} -bootstrap"
+flags="${flags} -bootstrap-expect 3"
 else
 echo "This cluster has already been bootstrapped"
 flags=$(/usr/bin/etcdctl ls /consul.io/bootstrap/machines | while read line; do

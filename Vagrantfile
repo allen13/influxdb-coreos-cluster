@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_version = ">= 308.0.1"
   config.vm.box_url = "http://alpha.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json"
 
-  (1..1).each do |vm_number|
+  (1..3).each do |vm_number|
     provision_coreos_influxdb_vm(vm_number, config)
   end
 end

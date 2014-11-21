@@ -23,5 +23,11 @@ Install ansible on Ubuntu
     ./deploy_influxdb_nodes
     
 You can then use fleetctl to mange and monitor your cluster.
+
+####Destroying
+
+When spinning down the cluster it is important to remove the coreos discovery_token so that the cluster will sync itself on the next boot. I added a convienient script to take care of this.
+
+    ./destroy_cluster
     
 

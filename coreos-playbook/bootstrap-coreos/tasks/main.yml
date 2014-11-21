@@ -1,0 +1,27 @@
+- name: Setup DNS config
+  copy: src=resolv.conf dest=/etc/resolv.conf
+  sudo: true
+
+- name: Create consul directory
+  file: path=/opt/consul state=directory
+  sudo: true
+
+- name: Copy over consul bootstrap script
+  copy: src=bootstrap-consul.sh dest=/opt/consul/bootstrap-consul.sh mode=0755
+  sudo: true
+
+- name: Copy over consul service
+  copy: src=consul.service dest=/etc/systemd/system/consul.service
+  sudo: true
+
+- name: Copy over registrator service
+  copy: src=registrator.service dest=/etc/systemd/system/registrator.service
+  sudo: true
+
+- name: Create cloud-init directory
+  file: path=/var/lib/coreos-install state=directory
+  sudo: true
+
+- name: Create coreos cloud config
+  template: src=cloud-config.yml.j2 dest=/var/lib/coreos-install/user_data
+  sudo: true

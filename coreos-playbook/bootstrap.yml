@@ -1,0 +1,6 @@
+---
+- hosts: all
+  gather_facts: False
+  roles:
+    - bootstrap-ansible
+    - bootstrap-coreos

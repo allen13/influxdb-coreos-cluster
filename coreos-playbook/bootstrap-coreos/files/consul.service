@@ -1,0 +1,26 @@
+[Unit]
+Description=Consul agent bootstrap
+After=docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+Restart=always
+
+ExecStartPre=/usr/bin/mkdir -p /opt/consul/data
+ExecStartPre=-/usr/bin/docker kill consul
+ExecStartPre=-/usr/bin/docker rm consul
+ExecStartPre=/usr/bin/docker pull progrium/consul
+#Make sure this ip is not there already
+ExecStartPre=-/usr/bin/etcdctl rm /consul.io/bootstrap/machines/$(cat /etc/machine-id)
+
+ExecStart=/opt/consul/bootstrap-consul.sh
+#Add as the main DNS
+ExecStartPost=/usr/bin/sed -i '1i nameserver 10.1.42.1' /etc/resolv.conf
+
+ExecStop=/usr/bin/docker stop consul
+ExecStopPost=/usr/bin/etcdctl rm /consul.io/bootstrap/machines/$(cat /etc/machine-id)
+
+
+[Install]
+WantedBy=multi-user.target

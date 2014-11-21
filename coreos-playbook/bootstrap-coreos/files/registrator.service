@@ -1,0 +1,18 @@
+[Unit]
+Description=Registrator
+After=docker.service
+Requires=docker.service
+After=consul.service
+
+[Service]
+
+EnvironmentFile=/etc/environment
+Restart=always
+
+ExecStartPre=-/usr/bin/docker kill registrator
+ExecStartPre=-/usr/bin/docker rm registrator
+ExecStartPre=/usr/bin/docker pull progrium/registrator
+
+ExecStart=/bin/sh -c "/usr/bin/docker run -v /var/run/docker.sock:/tmp/docker.sock --name registrator -h %H progrium/registrator consul://${COREOS_PRIVATE_IPV4}:8500"
+
+ExecStop=/usr/bin/docker stop registrator

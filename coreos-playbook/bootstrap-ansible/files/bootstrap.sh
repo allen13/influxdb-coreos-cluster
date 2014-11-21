@@ -8,7 +8,7 @@ fi
 
 PYPY_VERSION=2.4.0
 
-wget https://bitbucket.org/pypy/pypy/downloads/pypy-$PYPY_VERSION-linux64.tar.bz2
+wget https://s3.amazonaws.com/ansible-bootstrap/pypy-2.4.0-linux64.tar.bz2
 tar -xf pypy-$PYPY_VERSION-linux64.tar.bz2
 ln -s pypy-$PYPY_VERSION-linux64 pypy
 

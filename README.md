@@ -3,6 +3,12 @@ influxdb-coreos-cluster
 
 An influxdb cluster managed by coreos
 
+This setup is based on these CoreOS guides
+
+  * [Controlling the cluster with fleetctl](https://coreos.com/docs/launching-containers/launching/fleet-using-the-client/)
+  * [Clustering CoreOS with vagrant](https://coreos.com/blog/coreos-clustering-with-vagrant/)
+  * [Vagrant CoreOS](https://coreos.com/docs/running-coreos/platforms/vagrant/)
+
 ####Setup
 
 Requires [Vagrant](https://docs.vagrantup.com/v2/installation/), [Ansible](http://docs.ansible.com/intro_installation.html), and [fleetctl](https://github.com/coreos/fleet/)

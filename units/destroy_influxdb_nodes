@@ -1,0 +1,3 @@
+fleetctl destroy influxdb-master.service
+fleetctl destroy influxdb@01
+fleetctl destroy influxdb@02
